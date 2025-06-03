@@ -96,7 +96,12 @@ export default function App() {
             <div>
               <b>Skin:</b>
               <br />
-              <img src={result.skin} alt="Skin" style={{ width: 64, height: 128, marginTop: 4 }} />
+              <img
+                src={result.skin}
+                alt="Skin"
+                style={{ width: 64, height: 128, marginTop: 4 }}
+                onError={e => { e.currentTarget.src = '/default_skin.png'; }}
+              />
             </div>
           )}
           {result.cape && (
@@ -139,7 +144,12 @@ export default function App() {
             <div>
               <b>Skin:</b>
               <br />
-              <img src={result.skin} alt="Skin" style={{ width: 64, height: 128, marginTop: 4 }} />
+              <img
+                src={result.skin}
+                alt="Skin"
+                style={{ width: 64, height: 128, marginTop: 4 }}
+                onError={e => { e.currentTarget.src = '/default_skin.png'; }}
+              />
             </div>
           )}
           {renderLinked()}
