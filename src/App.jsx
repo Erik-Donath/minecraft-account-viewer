@@ -99,7 +99,12 @@ export default function App() {
               <img
                 src={result.skin}
                 alt="Skin"
-                style={{ width: 64, height: 128, marginTop: 4 }}
+                style={{
+                  width: 256,
+                  height: 512,
+                  marginTop: 4,
+                  imageRendering: "pixelated",
+                }}
                 onError={e => { e.currentTarget.src = '/default_skin.png'; }}
               />
             </div>
@@ -108,7 +113,16 @@ export default function App() {
             <div>
               <b>Cape:</b>
               <br />
-              <img src={result.cape} alt="Cape" style={{ width: 64, height: 32, marginTop: 4 }} />
+              <img
+                src={result.cape}
+                alt="Cape"
+                style={{
+                  width: 256,
+                  height: 128,
+                  marginTop: 4,
+                  imageRendering: "pixelated",
+                }}
+              />
             </div>
           )}
           {renderLinked()}
@@ -137,7 +151,16 @@ export default function App() {
             <div>
               <b>Icon:</b>
               <br />
-              <img src={result.icon} alt="Icon" style={{ width: 64, height: 64, marginTop: 4 }} />
+              <img
+                src={result.icon}
+                alt="Icon"
+                style={{
+                  width: 128,
+                  height: 128,
+                  marginTop: 4,
+                  imageRendering: "pixelated",
+                }}
+              />
             </div>
           )}
           {result.skin && (
@@ -147,7 +170,12 @@ export default function App() {
               <img
                 src={result.skin}
                 alt="Skin"
-                style={{ width: 64, height: 128, marginTop: 4 }}
+                style={{
+                  width: 256,
+                  height: 512,
+                  marginTop: 4,
+                  imageRendering: "pixelated",
+                }}
                 onError={e => { e.currentTarget.src = '/default_skin.png'; }}
               />
             </div>
