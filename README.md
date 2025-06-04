@@ -16,7 +16,7 @@ Try it here:
 
 ## ✨ Features
 
-- 🔎 Search Minecraft accounts by username, UUID, XUID, or Floodgate UUID
+- 🔎 Search Minecraft accounts by username, gametag, UUID, XUID, or Floodgate UUID
 - 🖼️ View Java and Bedrock account details, including skins and avatars
 - 🔗 See linked Java/Bedrock accounts if available
 - ⚡ Super fast and lightweight (Vite + React)
@@ -54,7 +54,7 @@ Try it here:
 ## 📝 Usage
 
 - Select **Java** or **Bedrock**.
-- Choose the identifier type (Username, UUID, XUID, or FUID).
+- Choose the identifier type (Username, Gametag, UUID, XUID, or FUID).
 - Enter the value and click **Search**.
 - View account details, skins, and linked account information.
 
@@ -71,13 +71,14 @@ Try it here:
 
 ## 📦 Deployment
 
-This project is automatically deployed to GitHub Pages from the `main` branch using [Vite's GitHub Pages integration](https://vitejs.dev/guide/static-deploy.html#github-pages).
+This project is automatically deployed to GitHub Pages from the `main` branch.
+This Project is based on the public [react-github-pages repository](https://github.com/Erik-Donath/react-github-pages) on my Github Account.
 
 ---
 
 ## 🔒 License
 
-MIT License
+[MIT License](LICENSE)
 
 ---
 
