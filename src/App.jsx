@@ -25,6 +25,44 @@ export default function App() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Read URL parameters and set input if present (all modes)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    let found = false;
+    if (params.get("username")) {
+      setPlatform("java");
+      setIdentifierType("username");
+      setInput(params.get("username"));
+      found = true;
+    } else if (params.get("uuid")) {
+      setPlatform("java");
+      setIdentifierType("uuid");
+      setInput(params.get("uuid"));
+      found = true;
+    } else if (params.get("gamertag")) {
+      setPlatform("bedrock");
+      setIdentifierType("gamertag");
+      setInput(params.get("gamertag"));
+      found = true;
+    } else if (params.get("xuid")) {
+      setPlatform("bedrock");
+      setIdentifierType("xuid");
+      setInput(params.get("xuid"));
+      found = true;
+    } else if (params.get("fuid")) {
+      setPlatform("bedrock");
+      setIdentifierType("fuid");
+      setInput(params.get("fuid"));
+      found = true;
+    }
+    // If a parameter was found, trigger search automatically
+    if (found) {
+      setTimeout(() => {
+        document.getElementById("auto-search-btn")?.click();
+      }, 0);
+    }
+  }, []);
+
   useEffect(() => {
     setIdentifierType(identifierOptions[platform][0].value);
   }, [platform]);
@@ -94,7 +132,7 @@ export default function App() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <button type="submit" disabled={loading || !input}>
+          <button id="auto-search-btn" type="submit" disabled={loading || !input}>
             {loading ? <div className="spinner" /> : "Search"}
           </button>
         </div>
