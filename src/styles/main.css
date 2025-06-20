@@ -52,6 +52,15 @@ input[type="text"] {
   border: 1px solid #404040;
   color: #fff;
   border-radius: 6px;
+  font-size: 1rem;
+  /* Prevent size change on focus */
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="text"]:active {
+  outline: 2px solid #00a8fc;
+  /* No size change */
 }
 
 button {
@@ -62,6 +71,19 @@ button {
   color: white;
   cursor: pointer;
   transition: background 0.2s;
+  font-size: 1rem;
+  /* Prevent size change on spinner */
+  min-width: 90px; /* Adjust as needed to fit both 'Search' and spinner */
+  height: 44px; /* Match input height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:focus,
+button:active {
+  outline: 2px solid #0090d4;
+  /* No size change */
 }
 
 button:hover {
@@ -139,6 +161,9 @@ button:hover {
   border-radius: 50%;
   border-top-color: #fff;
   animation: spin 1s linear infinite;
+  /* Center spinner in button */
+  display: inline-block;
+  vertical-align: middle;
 }
 
 @keyframes spin {
