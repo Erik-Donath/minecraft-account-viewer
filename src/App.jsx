@@ -29,39 +29,73 @@ export default function App() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     let found = false;
+    let platformValue = platform;
+    let identifierValue = identifierType;
+    let inputValue = input;
     if (params.get("username")) {
-      setPlatform("java");
-      setIdentifierType("username");
-      setInput(params.get("username"));
+      platformValue = "java";
+      identifierValue = "username";
+      inputValue = params.get("username");
       found = true;
     } else if (params.get("uuid")) {
-      setPlatform("java");
-      setIdentifierType("uuid");
-      setInput(params.get("uuid"));
+      platformValue = "java";
+      identifierValue = "uuid";
+      inputValue = params.get("uuid");
       found = true;
     } else if (params.get("gamertag")) {
-      setPlatform("bedrock");
-      setIdentifierType("gamertag");
-      setInput(params.get("gamertag"));
+      platformValue = "bedrock";
+      identifierValue = "gamertag";
+      inputValue = params.get("gamertag");
       found = true;
     } else if (params.get("xuid")) {
-      setPlatform("bedrock");
-      setIdentifierType("xuid");
-      setInput(params.get("xuid"));
+      platformValue = "bedrock";
+      identifierValue = "xuid";
+      inputValue = params.get("xuid");
       found = true;
     } else if (params.get("fuid")) {
-      setPlatform("bedrock");
-      setIdentifierType("fuid");
-      setInput(params.get("fuid"));
+      platformValue = "bedrock";
+      identifierValue = "fuid";
+      inputValue = params.get("fuid");
       found = true;
     }
-    // If a parameter was found, trigger search automatically
     if (found) {
-      setTimeout(() => {
-        document.getElementById("auto-search-btn")?.click();
-      }, 0);
+      setPlatform(platformValue);
+      setIdentifierType(identifierValue);
+      setInput(inputValue);
+      setAutoSearch(true);
     }
   }, []);
+
+  // Only search automatically if triggered by URL param
+  const [autoSearch, setAutoSearch] = useState(false);
+  useEffect(() => {
+    if (autoSearch) {
+      (async () => {
+        setResult(null);
+        setError("");
+        setLoading(true);
+        try {
+          const endpoint =
+            platform === "bedrock" && identifierType === "gamertag"
+              ? `bedrock/gamertag/${encodeURIComponent(input)}`
+              : `${platform}/${identifierType}/${encodeURIComponent(input)}`;
+          const res = await fetch(`${API_BASE}/${endpoint}`, {
+            headers: API_KEY ? { "x-api-key": API_KEY } : {},
+          });
+          if (!res.ok)
+            throw new Error(
+              res.status === 404 ? "Account not found" : "API Error - Please try again"
+            );
+          setResult(await res.json());
+        } catch (err) {
+          setError(err.message);
+        }
+        setLoading(false);
+        setAutoSearch(false);
+      })();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoSearch]);
 
   useEffect(() => {
     setIdentifierType(identifierOptions[platform][0].value);
